@@ -28,11 +28,11 @@ var pngquant     = require('imagemin-pngquant');
 *
 **/
 gulp.task('sass', function() {
-  gulp.src('sass/**/*.scss')
+  gulp.src('src/**/*.scss')
   .pipe(sass({outputStyle: 'compressed'}))
   .pipe(prefix('last 2 versions', '> 1%', 'ie 8', 'Android 2', 'Firefox ESR'))
   .pipe(plumber())
-  .pipe(gulp.dest('css'));
+  .pipe(gulp.dest('build'));
 });
 
 /**
@@ -43,7 +43,7 @@ gulp.task('sass', function() {
 *
 **/
 gulp.task('browser-sync', function() {
-  browserSync.init(['css/*.css', 'js/**/*.js', 'index.html'], {
+  browserSync.init(['build/*.css', 'js/**/*.js', 'index.html'], {
     server: {
       baseDir: './'
     }
@@ -92,7 +92,7 @@ gulp.task('images', function () {
 *
 **/
 gulp.task('default', ['sass', 'browser-sync', 'scripts', 'images'], function () {
-  gulp.watch('sass/**/*.scss', ['sass']);
+  gulp.watch('src/**/*.scss', ['sass']);
   gulp.watch('js/**/*.js', ['scripts']);
   gulp.watch('images/*', ['images']);
 });
